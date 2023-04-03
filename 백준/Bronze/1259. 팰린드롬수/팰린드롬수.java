@@ -1,27 +1,32 @@
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String args[]) {
         Scanner sc = new Scanner(System.in);
 
         while (true) {
-            String input = sc.nextLine();
-            if (input.equals("0")) {
+            String word = sc.nextLine();
+            if (word.equals("0"))
                 break;
+
+            // 맨 앞의 0 제거
+            while (word.startsWith("0")) {
+                word = word.substring(1);
             }
 
+            int N = word.length();
             boolean isPalindrome = true;
-            int len = input.length();
-            for (int i = 0; i < len / 2; i++) {
-                if (input.charAt(i) != input.charAt(len - i - 1)) {
+            for (int j = 0; j < N / 2; j++) {
+                if (word.charAt(j) != word.charAt(N - 1 - j)) {
                     isPalindrome = false;
                     break;
                 }
             }
-
-            System.out.println(isPalindrome ? "yes" : "no");
+            if (isPalindrome) {
+                System.out.println("yes");
+            } else {
+                System.out.println("no");
+            }
         }
-
-        sc.close();
     }
 }
