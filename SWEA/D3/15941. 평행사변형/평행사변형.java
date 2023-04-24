@@ -1,0 +1,1 @@
+import java.util.*;public class Solution{public static void main(String args[])throws Exception{Scanner s=new Scanner(System.in);int T=s.nextInt(),N;for(int t=1; t<=T;t++){N=s.nextInt();System.out.println("#"+t+" "+N*N);}}}
