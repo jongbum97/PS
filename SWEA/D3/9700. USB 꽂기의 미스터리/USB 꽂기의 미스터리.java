@@ -1,30 +1,26 @@
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.util.*;
 
 public class Solution {
+	public static void main(String args[]) throws Exception {
+		Scanner sc = new Scanner(System.in);
 
-	public static void main(String[] args) throws Exception{		
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		int T = Integer.parseInt(br.readLine());
-		for(int t=1; t<=T; ++t) {
-			String[] str = br.readLine().split(" ");
-			double p = Double.parseDouble(str[0]);
-			double q = Double.parseDouble(str[1]);
-			String result = "YES";
+		int T = sc.nextInt();
+
+		for (int tc = 1; tc <= T; tc++) {
+			Float p = sc.nextFloat();
+			Float q = sc.nextFloat();
 			
-			double s1 = (1-p)*q;
-			double s2 = p*(1-q)*q;
-			if(s1 >= s2) {
-				result = "NO";
+			Float s1 = (1-p)*q;
+			Float s2 = p*(1-q)*q;
+			
+			String ans = "YES";
+			if(s1>=s2){
+				ans = "NO";
 			}
-			bw.write("#"+t+" "+result+"\n");
+			System.out.println("#"+tc+" "+ans);
+			
 		}
-		bw.close();
-		br.close();
-
 	}
+	
 
 }
