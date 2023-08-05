@@ -50,6 +50,10 @@ public class Main {
 				return;
 			}
 			
+			if (ans[n.x][n.y] < n.cost) {
+				continue;
+			}
+			
 			for (int i = 0; i < 4; i++) {
 				int u = n.x + dr[i];
 				int v = n.y + dc[i];
