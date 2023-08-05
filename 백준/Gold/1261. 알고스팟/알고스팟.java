@@ -37,6 +37,10 @@ public class Main {
 			
 			Node n = q.remove();
 			
+			if (ans[n.x][n.y] < n.count) {
+				continue;
+			}
+			
 			for (int i = 0; i < 4; i++) {
 				int x = n.x + dr[i];
 				int y = n.y + dc[i];
