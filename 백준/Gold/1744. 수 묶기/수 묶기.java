@@ -1,48 +1,48 @@
-
 import java.io.*;
 import java.util.*;
 
 public class Main {
-
-	static int N;
-	static List<Integer> nn = new ArrayList<>();
+	
+	static int N, ans;
 	static List<Integer> pn = new ArrayList<>();
-
-	public static void main(String[] args) throws Exception {
-
+	static List<Integer> mn = new ArrayList<>();
+	
+	
+	public static void main(String[] args) throws IOException{
+		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-
+		
 		N = Integer.parseInt(br.readLine());
 		for (int i = 0; i < N; i++) {
-			int n = Integer.parseInt(br.readLine());
-			if (n > 0)
-				pn.add(n);
-			else
-				nn.add(n);
+			int a = Integer.parseInt(br.readLine());
+			if (a<=0) {
+				mn.add(a);
+			}else {
+				pn.add(a);
+			}
 		}
-
-		Collections.sort(pn, Collections.reverseOrder());
-		Collections.sort(nn);
-
-		int sum = 0;
-		int i = 0;
-		while (i < pn.size()) {
-			if (i + 1 < pn.size() && pn.get(i) != 1 && pn.get(i + 1) != 1)
-				sum += pn.get(i++) * pn.get(i++);
-			else
-				sum += pn.get(i++);
+		
+		Collections.sort(mn);
+		Collections.sort(pn,Collections.reverseOrder());
+		
+		for (int i = 0; i < mn.size(); i+=2) {
+			if (mn.size()==i+1) {
+				ans += mn.get(i);
+			}else {
+				ans += mn.get(i)*mn.get(i+1);
+			}
 		}
-
-		i = 0;
-		while (i < nn.size()) {
-			if (i + 1 < nn.size() && nn.get(i) != 1 && nn.get(i + 1) != 1)
-				sum += nn.get(i++) * nn.get(i++);
-			else
-				sum += nn.get(i++);
+		for (int i = 0; i < pn.size(); i+=2) {
+			if (pn.size()==i+1) {
+				ans += pn.get(i);
+			}else {
+				ans += Math.max(pn.get(i)+pn.get(i+1), pn.get(i)*pn.get(i+1));
+			}
 		}
-
-		bw.write(sum + "\n");
-		bw.flush();
+		
+		
+		System.out.println(ans);
+		
 	}
+
 }
