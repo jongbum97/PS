@@ -4,8 +4,7 @@ import java.util.*;
 public class Main {
 	
 	static int A, B, C, D;
-	static Set<Node> list;
-	static boolean state;
+	static boolean state, visit[][];
 	
 	public static void main(String[] args) throws IOException{
 		
@@ -15,7 +14,7 @@ public class Main {
 		B = Integer.parseInt(st.nextToken());
 		C = Integer.parseInt(st.nextToken());
 		D = (A+B+C)/3;
-		list = new HashSet<>();
+		
 		if ((A+B+C)%3==0) {
 			BFS();
 		}
@@ -29,7 +28,7 @@ public class Main {
 	}
 
 	static void BFS() {
-		
+		visit = new boolean[760][760];
 		Queue<Node> q = new LinkedList<>();
 		q.add(new Node(A, B, C));
 		
@@ -40,11 +39,11 @@ public class Main {
 				return;
 			}
 			
-			if (list.contains(n)) {
+			if (visit[n.a][n.b]) {
 				continue;
 			}
 			
-			list.add(n);
+			visit[n.a][n.b]= true; 
 			
 			if (n.a>n.b) {
 				q.add(new Node(n.a-n.b, 2*n.b, n.c));
@@ -63,11 +62,8 @@ public class Main {
 			}else if (n.b<n.c) {
 				q.add(new Node(n.a, n.b*2, n.c-n.b));
 			}
-			
 		}
-		
 	}
-	
 }
 
 class Node{
@@ -75,38 +71,10 @@ class Node{
 	int b;
 	int c;
 	public Node(int a, int b, int c) {
-		this.a = a;
-		this.b = b;
-		this.c = c;
+		int[] n = {a, b, c};
+		Arrays.sort(n);
+		this.a = n[0];
+		this.b = n[1];
+		this.c = n[2];
 	}
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + a;
-		result = prime * result + b;
-		result = prime * result + c;
-		return result;
-	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Node other = (Node) obj;
-		if (a != other.a)
-			return false;
-		if (b != other.b)
-			return false;
-		if (c != other.c)
-			return false;
-		return true;
-	}
-
-	
-	
-	
 }
