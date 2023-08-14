@@ -4,7 +4,7 @@
 
 ### 성능 요약
 
-메모리: 11572 KB, 시간: 84 ms
+메모리: 11680 KB, 시간: 80 ms
 
 ### 분류
 
@@ -30,7 +30,7 @@
 	<li><code>R</code>: 세로 중심선을 중심으로 반으로 접되 왼쪽 면이 오른쪽 면을 덮도록 접음</li>
 </ul>
 
-<p style="text-align: center;"><img alt="" src="" style="width: 164px; height: 110px;"></p>
+<p style="text-align: center;"><img alt="" src="https://upload.acmicpc.net/f6ce9eb3-d679-4618-868f-a77ff414224e/-/preview/" style="width: 164px; height: 110px;"></p>
 
 <ul>
 	<li><code>L</code>: 세로 중심선을 중심으로 반으로 접되 오른쪽 면이 왼쪽 면을 덮도록 접음</li>

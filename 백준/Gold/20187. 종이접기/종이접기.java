@@ -61,7 +61,6 @@ public class Main {
 		bbb(a, b+(1<<p), p-1);
 		bbb(a+(1<<p), b+(1<<p), p-1);
 		
-		
 	}
 
 }
