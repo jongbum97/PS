@@ -27,23 +27,6 @@ public class Main {
 	
 	static void DFS(int x, int y) {
 		
-		state = true;
-		for (int i = 0; i < 9; i++) {
-			for (int j = 0; j < 9; j++) {
-				if(board[i][j]==0) {
-					state = false;
-				}
-			}
-		}
-		if(state) {
-			for (int i = 0; i < 9; i++) {
-				for (int j = 0; j < 9; j++) {
-					sb.append(board[i][j]+" ");
-				}sb.append("\n");
-			}
-			return;
-		}
-		
 		for (int i = x; i < 9; i++) {
 			for (int j = 0; j < 9; j++) {
 				if(i==x&&j<y) continue;
@@ -58,6 +41,13 @@ public class Main {
 					return;
 				}
 			}
+		}
+		
+		state = true;
+		for (int i = 0; i < 9; i++) {
+			for (int j = 0; j < 9; j++) {
+				sb.append(board[i][j]+" ");
+			}sb.append("\n");
 		}
 	}
 	
