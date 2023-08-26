@@ -54,8 +54,9 @@ public class Main {
 				for (int[] nn : list[n.x]) {
 					int a = nn[0];
 					int c = nn[1];
-					if(dp[a]>dp[n.x]+c) {
-						q.add(new Node(a, dp[a]=dp[n.x]+c));
+					if(dp[a]>n.cost+c) {
+						dp[a]=n.cost+c;
+						q.add(new Node(a, dp[a]));
 					}
 				}
 				
