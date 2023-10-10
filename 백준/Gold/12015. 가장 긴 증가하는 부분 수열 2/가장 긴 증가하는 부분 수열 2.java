@@ -49,10 +49,10 @@ public class Main {
 			
 		}
 		
-		while(nums[mid]<n && nums[mid]>0) {
-			mid++;
-		}
-//		if(nums[mid]<n) mid++;
+//		while(nums[mid]<n && nums[mid]>0) {
+//			mid++;
+//		}
+		if(nums[mid]<n && nums[mid]>0) mid++;
 		
 		return mid;
 		
