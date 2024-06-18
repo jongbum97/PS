@@ -44,7 +44,7 @@ public class Main {
 //			System.out.println(Arrays.toString(cost));
 
 			Node n = q.poll();
-
+            if(n.y == end) return cost[end];
 			if(cost[n.y] < n.cost) continue;
 
 			for(Node nn : line[n.y]){
