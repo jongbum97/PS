@@ -17,25 +17,22 @@ public class Main {
 		ans = -1;
 		int cnt = 0;
 
-		outer: for (long i=1; i<=9876543210L; ){
+		outer: for (long i=1; i<=9876543210L; i++){
 
 			char[] nums = (i+"").toCharArray();
 
 			for (int j=0; j<nums.length-1; j++){
 				if(nums[j] <= nums[j+1]) {
-					i += Math.pow(10, nums.length-j-1);
-					i /= Math.pow(10, nums.length-j-1);
-					i *= Math.pow(10, nums.length-j-1);
+					long k = (long)Math.pow(10, nums.length-j-1);
+					i = ((i/k)+1)*k-1;
 					continue outer;
 				}
 			}
 
-			cnt++;
-			if(cnt == N) {
+			if(++cnt == N) {
 				ans = i;
 				break;
 			}
-			i++;
 
 		}
 
