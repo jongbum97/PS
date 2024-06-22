@@ -45,7 +45,8 @@ public class Main {
 
 			Node n = q.remove();
 
-			if(ans[n.x][n.y] < n.cost) continue;
+//			if(n.x == N-1 && n.y == N-1) return;
+//			if(ans[n.x][n.y] < n.cost) continue;
 
 			for(int i=0; i<4; i++){
 				int a = n.x + dr[i];
