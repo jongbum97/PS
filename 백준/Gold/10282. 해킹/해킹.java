@@ -46,7 +46,7 @@ public class Main {
 		dis = new int[V+1];
 		Arrays.fill(dis, Integer.MAX_VALUE);
 		dis[start] = 0;
-		Queue<Node> q = new PriorityQueue<>();
+		Queue<Node> q = new PriorityQueue<>(Comparator.comparingInt(a -> a.cost));
 		q.add(new Node(start, 0));
 
 		while (!q.isEmpty()){
@@ -66,7 +66,7 @@ public class Main {
 
 	}
 
-	static class Node implements Comparable<Node>{
+	static class Node{
 		int y;
 		int cost;
 		Node(int y, int cost){
@@ -74,10 +74,6 @@ public class Main {
 			this.cost = cost;
 		}
 
-		@Override
-		public int compareTo(Node o) {
-			return this.cost-o.cost;
-		}
 	}
 
 }
