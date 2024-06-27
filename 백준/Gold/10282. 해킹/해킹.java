@@ -1,91 +1,83 @@
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 
 public class Main {
-	
-	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-	static StringTokenizer st;
-	static StringBuilder sb = new StringBuilder();
-	
-	static int T,n,d,c;
-	static ArrayList<int[]>[] edge;
-	static int[] dp;
-	
+
+	static int V, dis[], cnt, max;
+	static List<Node>[] line;
+
 	public static void main(String[] args) throws Exception {
-		
-		T = Integer.parseInt(br.readLine());
-		
-		while(T-- > 0) {
-			st = new StringTokenizer(br.readLine());
-			n = Integer.parseInt(st.nextToken());
-			d = Integer.parseInt(st.nextToken());
-			c = Integer.parseInt(st.nextToken());
-			
-			dp = new int[n+1];
-			edge = new ArrayList[n+1];
-			Arrays.fill(dp, Integer.MAX_VALUE);
-			
-			for(int i=1;i<=n;++i) {
-				edge[i] = new ArrayList<int[]>();
+
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+		StringBuilder sb = new StringBuilder();
+
+		int T = Integer.parseInt(br.readLine());
+		while (T-- > 0){
+			st  = new StringTokenizer(br.readLine());
+			V = Integer.parseInt(st.nextToken());
+			int d = Integer.parseInt(st.nextToken());
+			int c = Integer.parseInt(st.nextToken());
+			line = new List[V+1];
+			for (int i=1; i<=V; i++){
+				line[i] = new ArrayList<>();
 			}
-			
-			while(d-- > 0) {
+			while (d-- > 0){
 				st = new StringTokenizer(br.readLine());
-				
-				int to = Integer.parseInt(st.nextToken());
-				int from = Integer.parseInt(st.nextToken());
-				int time = Integer.parseInt(st.nextToken());
-			
-				edge[from].add(new int[] {to,time});
+				int a = Integer.parseInt(st.nextToken());
+				int b = Integer.parseInt(st.nextToken());
+				int cost = Integer.parseInt(st.nextToken());
+				line[b].add(new Node(a, cost));
 			}
-			
-			findMinTime();
-			findAns();
-		}	
-		System.out.println(sb);
-	}
-	
-	static void findAns() {
-		int cnt = 0;
-		int t = 0;
-		
-		for(int i=1;i<=n;++i) {
-			if(dp[i] != Integer.MAX_VALUE) {
-				cnt++;
-				t = Math.max(dp[i], t);
-			}
+
+			cnt = 0;
+			max = 0;
+			dijkstra(c);
+
+			sb.append(cnt).append(" ").append(max).append("\n");
+
 		}
-		
-		sb.append(cnt+" " + t+"\n");
-			
+
+		System.out.println(sb);
+
 	}
-	
-	static void findMinTime() {
-		
-		Queue<int[]> q = new LinkedList<>();
-		q.add(new int[] {c,0});
-		dp[c] = 0;// 감염 시작지
-		
-		while(!q.isEmpty()) {
-			int[] cur = q.poll();
-			
-			//현재 컴퓨터가 감염되었을 때 다음 지점가기
-			for(int i=0;i<edge[cur[0]].size();++i) {
-				
-				int nxt = edge[cur[0]].get(i)[0];
-				int nxtCost = edge[cur[0]].get(i)[1];
-				
-				//다음지점으로 가는게 더 최소비용일 때만
-				if(dp[nxt] > dp[cur[0]] + nxtCost) {
-					dp[nxt] = dp[cur[0]] + nxtCost;
-					q.add(new int[] {nxt,dp[nxt]}); // 다음구간에 대해서 감염
+
+	static void dijkstra(int start){
+		dis = new int[V+1];
+		Arrays.fill(dis, Integer.MAX_VALUE);
+		dis[start] = 0;
+		Queue<Node> q = new PriorityQueue<>();
+		q.add(new Node(start, 0));
+
+		while (!q.isEmpty()){
+			Node n = q.remove();
+
+			if(dis[n.y] < n.cost) continue;
+			cnt++;
+			max = Math.max(max, dis[n.y]);
+
+			for(Node nn : line[n.y]){
+				if(dis[nn.y] > n.cost + nn.cost){
+					q.add(new Node(nn.y, dis[nn.y] = n.cost + nn.cost));
 				}
 			}
+
+		}
+
+	}
+
+	static class Node implements Comparable<Node>{
+		int y;
+		int cost;
+		Node(int y, int cost){
+			this.y = y;
+			this.cost = cost;
+		}
+
+		@Override
+		public int compareTo(Node o) {
+			return this.cost-o.cost;
 		}
 	}
- }
+
+}
