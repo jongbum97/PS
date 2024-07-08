@@ -14,10 +14,10 @@ public class Main {
 
 			N = Integer.parseInt(br.readLine());
 			name = new HashMap<>();
-			parent = new int[200_000];
-			count = new int[200_000];
+			parent = new int[2*N+1];
+			count = new int[2*N+1];
 			Arrays.fill(count, 1);
-			for(int i=0; i<200_000; i++){
+			for(int i=0; i<2*N+1; i++){
 				parent[i] = i;
 			}
 			int cnt = 0;
