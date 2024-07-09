@@ -4,7 +4,7 @@ import java.util.*;
 public class Main {
 
 	static int nums[][], ans;
-	static Map<Integer, Boolean> result;
+	static Set<Integer> result;
 	static final int end = 1985229328, dr[] = {-1, 0, 1, 0}, dc[] = {0, 1 ,0, -1};
 
 	public static void main(String[] args) throws Exception {
@@ -18,12 +18,12 @@ public class Main {
 		}
 
 		ans = -1;
-		result = new HashMap<>();
+		result = new HashSet<>();
 		int t = arrToBit(nums);
 
 		Queue<int[]> q = new ArrayDeque<>();
 		q.add(new int[]{t, 0});
-		result.put(t, true);
+		result.add(t);
 
 		while(!q.isEmpty()){
 
@@ -46,8 +46,8 @@ public class Main {
 							arr[i][j] = arr[a][b];
 							arr[a][b] = 0;
 							int tmp = arrToBit(arr);
-							if(!result.containsKey(tmp)){
-								result.put(tmp, true);
+							if(!result.contains(tmp)){
+								result.add(tmp);
 								q.add(new int[]{tmp, n[1]+1});
 							}
 							arr[a][b] = arr[i][j];
