@@ -1,4 +1,5 @@
 import java.io.*;
+import java.math.*;
 import java.util.*;
 
 public class Main {
@@ -19,7 +20,6 @@ public class Main {
 //		System.out.println(function(a, end) - function(b, end));
 //		System.out.println((function(a, start) - function(b, start)) * (function(a, end) - function(b, end)) <= 0);
 
-		double t = (function(a, start) - function(b, start)) * (function(a, end) - function(b, end));
 		if(start > end){
 			System.out.println(0);
 		}else if(start == end){
@@ -27,7 +27,7 @@ public class Main {
 				System.out.println(1);
 			else
 				System.out.println(0);
-		}else if(t <= 0 || Math.abs(t) < 1e-3){
+		}else if(function(a, start).subtract(function(b, start)).multiply(function(a, end).subtract(function(b, end))).compareTo(BigDecimal.valueOf(0)) <= 0){
 			System.out.println(1);
 		}else{
 			System.out.println(0);
@@ -35,9 +35,18 @@ public class Main {
 
 	}
 
-	static double function(int[] arr, int x){
-		if(arr[2]-arr[0] == 0) return arr[1];
-		return ((double)(arr[3]-arr[1])/(arr[2]-arr[0]))*(x - arr[0]) + arr[1];
+	static BigDecimal function(int[] arr, int x) {
+		BigDecimal numerator = BigDecimal.valueOf(arr[3] - arr[1]);
+		BigDecimal denominator = BigDecimal.valueOf(arr[2] - arr[0]);
+		BigDecimal xMinusX0 = BigDecimal.valueOf(x - arr[0]);
+		BigDecimal y1 = BigDecimal.valueOf(arr[1]);
+
+		if (arr[2] - arr[0] == 0) return y1;
+
+		return numerator
+				.multiply(xMinusX0)
+				.divide(denominator, 10, RoundingMode.HALF_UP)
+				.add(y1);
 	}
 
 }
