@@ -21,7 +21,7 @@ public class Main {
 			if(arr[size-1] < nums[i]){
 				arr[size++] = nums[i];
 			}else{
-				int idx = Arrays.binarySearch(arr, 0, size, nums[i]);
+				int idx = binarySearch(arr, 0, size, nums[i]);
 				if(idx < 0){
 					arr[-1-idx] = nums[i];
 				}
@@ -29,6 +29,24 @@ public class Main {
 		}
 
 		System.out.println(N-size);
+
+	}
+
+	static int binarySearch(int[] arr, int left, int right, int key){
+
+		while(left <= right){
+			int mid = (left+right) / 2;
+
+			if(key < arr[mid])
+				right = mid - 1;
+			else if(key > arr[mid])
+				left = mid + 1;
+			else
+				return mid;
+
+		}
+
+		return -left-1;
 
 	}
 
