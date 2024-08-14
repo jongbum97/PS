@@ -18,7 +18,12 @@ public class Main {
 		L = Integer.parseInt(st.nextToken());
 		P = Integer.parseInt(st.nextToken());
 
-		Queue<Integer> q = new PriorityQueue<>(new Com());
+		Queue<Integer> q = new PriorityQueue<>(new Comparator<Integer>(){
+			@Override
+			public int compare(Integer a, Integer b){
+				return b-a;
+			}
+		});
 		for(int i=1; i<=L; i++){
 			P--;
 			if(P < 0){
@@ -36,14 +41,6 @@ public class Main {
 
 		System.out.println(ans);
 
-	}
-
-	static class Com implements Comparator<Integer>{
-
-		@Override
-		public int compare(Integer o1, Integer o2) {
-			return o2-o1;
-		}
 	}
 
 }
