@@ -18,7 +18,7 @@ public class Main {
 		L = Integer.parseInt(st.nextToken());
 		P = Integer.parseInt(st.nextToken());
 
-		Queue<Integer> q = new PriorityQueue<>((a,b) -> b-a);
+		Queue<Integer> q = new PriorityQueue<>(Comparator.reverseOrder());
 		for(int i=1; i<=L; i++){
 			P--;
 			if(P < 0){
